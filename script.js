@@ -16,12 +16,13 @@ class bookInfoConstructor {
         this.pages = var3;
     }
 }
+
 let bookArray = [];
 
 addButton.addEventListener('click', function() {
     form.style.display = 'block';
     body.style.zIndex = '7';
-    body.style.backgroundColor = 'rgb(0, 0, 0, 0.9)';
+    body.style.backgroundColor = 'rgb(0, 0, 0, 0.5)';
 });
 
 cancelButton.addEventListener('click', function() {
@@ -29,9 +30,7 @@ cancelButton.addEventListener('click', function() {
     body.style.backgroundColor = '';
 });
 
-submitButton.addEventListener('click', function(event) {
-    event.preventDefault();
-
+submitButton.addEventListener('click', function() {
     let name = nameInput.value;
     let author = authorInput.value;
     let pages = pagesInput.value;
@@ -39,6 +38,7 @@ submitButton.addEventListener('click', function(event) {
     insertObject(name, author, pages);
     form.style.display = 'none';
     body.style.backgroundColor = '';
+    window.location.reload();
 });
  
 function insertObject(name, author, pages) {
@@ -48,27 +48,60 @@ function insertObject(name, author, pages) {
 
 function insertArray(info) {
     bookArray.push(info);
-    insertText(bookArray);
+    if(localStorage.length == 0) {
+        localStorage.setItem("bookArray", JSON.stringify(bookArray));
+    } else {
+        let localStorageBookArray = JSON.parse(localStorage.getItem('bookArray'));
+        localStorageBookArray.push(info);
+        localStorage.setItem("bookArray", JSON.stringify(localStorageBookArray));
+    }
 }
 
-function insertText(bookArray) {
+function insertText() {
+        let localStorageBookArray = JSON.parse(localStorage.getItem('bookArray'));
+
+    for(let i = 0; i < localStorageBookArray.length; i++) {
         let newDiv = document.createElement('div');
-        let bookTitle = document.createElement('h3');
+        let bookTitle = document.createElement('p');
         let authorPara = document.createElement('p');
         let pagesPara = document.createElement('p');
+        let button = document.createElement('button');
+        
+        button.setAttribute('type', 'submit');
+        button.className = `${i}`;
 
-        let bookTitleText = document.createTextNode(bookArray[bookArray.length - 1].name);
-        let authorParaText = document.createTextNode(`Author: ${bookArray[bookArray.length - 1].author}`);
-        let pagesParaText = document.createTextNode(`Pages: ${bookArray[bookArray.length - 1].pages}`);
+        let bookTitleText = document.createTextNode(localStorageBookArray[i].name);
+        let authorParaText = document.createTextNode(`Author: ${localStorageBookArray[i].author}`);
+        let pagesParaText = document.createTextNode(`Pages: ${localStorageBookArray[i].pages}`);
+        let buttonText = document.createTextNode('Remove');
 
         bookTitle.appendChild(bookTitleText);
         authorPara.appendChild(authorParaText);
         pagesPara.appendChild(pagesParaText);
+        button.appendChild(buttonText);
 
+        bookTitle.appendChild(button);
         newDiv.appendChild(bookTitle);
         newDiv.appendChild(authorPara);
         newDiv.appendChild(pagesPara);
 
         main.appendChild(newDiv);
+    }
+    removeButton();
 }
 
+function removeButton() {
+    let localStorageBookArray = JSON.parse(localStorage.getItem('bookArray'));
+    let removeButton = document.querySelectorAll('main div p button');
+    for(let i = 0; i < removeButton.length; i++) {
+        removeButton[i].addEventListener('click', function() {
+            localStorageBookArray.splice(parseInt(removeButton[i].className, 10), 1);
+            localStorage.setItem("bookArray", JSON.stringify(localStorageBookArray));
+            window.location.reload();
+        });
+    }
+}
+
+insertText();
+
+console.log(localStorage);
