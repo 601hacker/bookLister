@@ -42,14 +42,16 @@ main {
     padding: 2rem 0 2rem 0;
     grid-gap: 2rem;
     grid-template-columns: repeat(3, 30%);
-    grid-template-rows: repeat(auto-fill, 200px);
+    grid-template-rows: repeat(auto-fill, 265px);
     justify-content: center;
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
 }
 
 main div {
     border: 1px solid black;
+    line-height: 10rem;
+    text-align: center;
 }
 
 main form {

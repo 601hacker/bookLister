@@ -2,8 +2,8 @@ const main = document.querySelector('main');
 const addButton = document.querySelector('header button');
 const form = document.querySelector('main form');
 const body = document.querySelector('body');
-const cancelButton = document.querySelector('main form [type="button"]');
-const submitButton = document.querySelector('main form [type="submit"]');
+const cancelButton = document.querySelector('.cancel');
+const submitButton = document.querySelector('.submit');
 
 const nameInput = document.querySelector('#name');
 const authorInput = document.querySelector('#author');
@@ -29,12 +29,16 @@ cancelButton.addEventListener('click', function() {
     body.style.backgroundColor = '';
 });
 
-submitButton.addEventListener('click', function() {
+submitButton.addEventListener('click', function(event) {
+    event.preventDefault();
+
     let name = nameInput.value;
     let author = authorInput.value;
     let pages = pagesInput.value;
 
     insertObject(name, author, pages);
+    form.style.display = 'none';
+    body.style.backgroundColor = '';
 });
  
 function insertObject(name, author, pages) {
@@ -47,10 +51,24 @@ function insertArray(info) {
     insertText(bookArray);
 }
 
-const div = document.querySelector('main div');
-
 function insertText(bookArray) {
-    console.log(bookArray[0]);
-}
+        let newDiv = document.createElement('div');
+        let bookTitle = document.createElement('h3');
+        let authorPara = document.createElement('p');
+        let pagesPara = document.createElement('p');
 
+        let bookTitleText = document.createTextNode(bookArray[bookArray.length - 1].name);
+        let authorParaText = document.createTextNode(`Author: ${bookArray[bookArray.length - 1].author}`);
+        let pagesParaText = document.createTextNode(`Pages: ${bookArray[bookArray.length - 1].pages}`);
+
+        bookTitle.appendChild(bookTitleText);
+        authorPara.appendChild(authorParaText);
+        pagesPara.appendChild(pagesParaText);
+
+        newDiv.appendChild(bookTitle);
+        newDiv.appendChild(authorPara);
+        newDiv.appendChild(pagesPara);
+
+        main.appendChild(newDiv);
+}
 
