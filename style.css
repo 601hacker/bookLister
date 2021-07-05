@@ -1,3 +1,5 @@
+/* Setup */
+
 * {
     padding: 0;
     margin: 0;
@@ -15,27 +17,51 @@ html {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Layout */
+
 body {
     font-size: 1.8rem;
     display: grid;
-    /* justify-content: center; */
     grid-template-rows: 15% auto;
     height: 100vh;
+    background-color: rgb(143, 217, 168);
+    color: #4B778D;
 }
+
+/* Header */
 
 header {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    flex-direction: row;
 }
 
-header button {
-    text-align: center;
-    font-size: 1rem;
-    width: 5rem;
-    height: 2rem;
+header h1 {
+    margin: 0.5rem;
 }
+
+.add {
+    color: #2E76CF;
+    margin: 0.5rem;
+    font-size: 3rem;
+    border: none;
+    background-color: rgb(0, 0, 0, 0.0);
+    width: 26.5px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.add:hover {
+    transform: rotate(90deg);
+    transition: 1s;
+    color: #fb4400;
+}
+
+/* Main */
 
 main {
     display: grid;
@@ -49,24 +75,70 @@ main {
 }
 
 main div {
-    border: 1px solid black;
-    line-height: 10rem;
+    border: 4px solid #4B778D;
+    border-radius: 0.5rem;
+    background-color: #D2E69C;
+    color: #4B778D;
+    display: flex;
+    font-size: 2rem;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem;
     text-align: left;
+    font-weight: 900;
 }
+
+main div p {
+    padding: 2rem 0 2rem 0;
+}
+
+main div p:first-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-style: italic;
+    font-size: 2.8rem;
+    font-weight: 900;
+}
+
+#remove {
+    background-color: rgb(0, 0, 0, 0.0);
+    color: #6b9658;
+    padding: 1rem;
+    width: 20px;
+    height: 30px;
+    font-size: 3rem;
+    font-weight: 900;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+}
+
+#remove:hover {
+    transform: rotate(90deg);
+    transition: 1s;
+    color: #FE0001;
+}
+
+/* Form */
 
 main form {
     display: none;
-    z-index: 9;
-    color: white;
+    background-color: #D2E69C;
+    border: 4px solid #2E76CF;
+    border-radius: 0.5rem;
+    color: #2E76CF;
+    font-weight: 900;
     position: fixed;
-    width: 33%;
+    width: 40%;
+    height: 50%;
+    top: 30%;
     right: 0;
     left: 0;
     margin-right: auto;
     margin-left: auto;
     line-height: 4rem;
-    font-size: 1.8rem;
-    background-color: black;
     text-align: left;
     padding: 1.5rem;
 }
@@ -79,21 +151,24 @@ main form input {
 }
 
 main form label {
-    font-size: 2rem;
+    font-size: 2.2rem;
 }
 
 main form input {
-    padding: 1rem;
+    padding: 1.5rem;
     margin-bottom: 2rem;
     border-radius: 24px;
     outline: none;
-    border: 1px solid rgb(223, 225, 229);
+    border: 2px solid #4B778D;
+    font-size: 1.6rem;
 }
 
 main form button {
+    color: #2E76CF;
+    border: 2px solid #4B778D;
+    font-weight: 900;
     padding: 1rem;
     border-radius: 0.5rem;
-    border: 1px solid rgb(223, 225, 229);
     margin-right: 1rem;
     margin-top: 1rem;
 }

@@ -1,5 +1,5 @@
 const main = document.querySelector('main');
-const addButton = document.querySelector('header button');
+const addButton = document.querySelector('.add');
 const form = document.querySelector('main form');
 const body = document.querySelector('body');
 const cancelButton = document.querySelector('.cancel');
@@ -21,8 +21,7 @@ let bookArray = [];
 
 addButton.addEventListener('click', function() {
     form.style.display = 'block';
-    body.style.zIndex = '7';
-    body.style.backgroundColor = 'rgb(0, 0, 0, 0.5)';
+    body.style.backgroundColor = 'rgb(143, 217, 168, 0.5)';
 });
 
 cancelButton.addEventListener('click', function() {
@@ -66,19 +65,21 @@ function insertText() {
         let authorPara = document.createElement('p');
         let pagesPara = document.createElement('p');
         let button = document.createElement('button');
+        let fontAwesome = document.createElement('i');
         
-        button.setAttribute('type', 'submit');
+        button.setAttribute('type', 'button');
         button.className = `${i}`;
+        button.id = 'remove';
+        fontAwesome.setAttribute('class', 'fas fa-times');
 
         let bookTitleText = document.createTextNode(localStorageBookArray[i].name);
         let authorParaText = document.createTextNode(`Author: ${localStorageBookArray[i].author}`);
         let pagesParaText = document.createTextNode(`Pages: ${localStorageBookArray[i].pages}`);
-        let buttonText = document.createTextNode('Remove');
 
         bookTitle.appendChild(bookTitleText);
         authorPara.appendChild(authorParaText);
         pagesPara.appendChild(pagesParaText);
-        button.appendChild(buttonText);
+        button.appendChild(fontAwesome);
 
         bookTitle.appendChild(button);
         newDiv.appendChild(bookTitle);
@@ -92,9 +93,13 @@ function insertText() {
 
 function removeButton() {
     let localStorageBookArray = JSON.parse(localStorage.getItem('bookArray'));
-    let removeButton = document.querySelectorAll('main div p button');
+    let removeButton = document.querySelectorAll('#remove');
     for(let i = 0; i < removeButton.length; i++) {
         removeButton[i].addEventListener('click', function() {
+            if(form.style.display == 'block') {
+                removeButton[i].style.backgroundColor = 'rgb(0, 0, 0, 0.0)';
+            }
+
             localStorageBookArray.splice(parseInt(removeButton[i].className, 10), 1);
             localStorage.setItem("bookArray", JSON.stringify(localStorageBookArray));
             window.location.reload();

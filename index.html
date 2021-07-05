@@ -6,11 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/a21b7c7cfb.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
         <h1>BookLister</h1>
-        <button type="button">+</button>    
+        <button type="button" class='add'><i class="fas fa-plus"></i></button>
     </header>
 
     <main>
@@ -25,7 +26,7 @@
 
             <label for="pages">Pages</label>
             <input type="number" name="pages" id="pages" required>
-
+            
             <button type="submit" class="submit">Submit</button>
             <button type="button" class="cancel">Cancel</button>
         </form>    
